@@ -27,7 +27,8 @@ namespace DevSandbox
         [Task]
         public void Compile(ILogger log)
         {
-            log.LogInformation("The compile task has run!");
+            log.LogInformation("The compile task is running!");
+            throw new System.Exception("Oh noes, compile failed!");
         }
 
         [Task]

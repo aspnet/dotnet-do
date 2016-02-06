@@ -11,7 +11,7 @@ namespace DotNetDo.Engine
 {
     public class TaskRunnerLoggerProvider : ILoggerProvider
     {
-        public static readonly int CategoryMaxLength = 10;
+        public static readonly int CategoryMaxLength = 7;
         public static readonly int StatusMaxLength = 4;
         private readonly Func<string, LogLevel, bool> _filter;
         private readonly ConcurrentDictionary<string, TaskRunnerLogger> _loggers = new ConcurrentDictionary<string, TaskRunnerLogger>();
@@ -77,8 +77,8 @@ namespace DotNetDo.Engine
                 }
                 else
                 {
-                    LogCore("START", "", state.ToString(), ConsoleColor.White, start: true);
-                    return new DisposableAction(() => LogCore("STOP", "", state.ToString(), ConsoleColor.White, start: false));
+                    LogCore("START", "", state.ToString(), ConsoleColor.White, ConsoleColor.White, start: true);
+                    return new DisposableAction(() => LogCore("STOP", "", state.ToString(), ConsoleColor.White, ConsoleColor.White, start: false));
                 }
             }
 
@@ -90,15 +90,18 @@ namespace DotNetDo.Engine
             public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
             {
                 var categoryColor = ConsoleColor.White;
+                var messageColor = ConsoleColor.White;
                 var category = "LOG";
                 switch (logLevel)
                 {
                     case LogLevel.Debug:
                         categoryColor = ConsoleColor.Magenta;
+                        messageColor = ConsoleColor.Magenta;
                         category = "DEBUG";
                         break;
                     case LogLevel.Verbose:
-                        categoryColor = ConsoleColor.Gray;
+                        categoryColor = ConsoleColor.DarkGray;
+                        messageColor = ConsoleColor.DarkGray;
                         category = "TRACE";
                         break;
                     case LogLevel.Information:
@@ -120,12 +123,12 @@ namespace DotNetDo.Engine
                     default:
                         break;
                 }
-                LogCore(category, string.Empty, formatter(state, exception), categoryColor, start: null);
+                LogCore(category, string.Empty, formatter(state, exception), categoryColor, messageColor, start: null);
             }
 
             private void LogStartAction(TaskRunnerActivity action)
             {
-                LogCore(action.Type, string.Empty, action.Name, categoryColor: ConsoleColor.Green, start: true);
+                LogCore(action.Type, string.Empty, action.Name, categoryColor: ConsoleColor.Green, messageColor: ConsoleColor.White, start: true);
             }
 
             private void LogEndAction(TaskRunnerActivity action)
@@ -135,16 +138,22 @@ namespace DotNetDo.Engine
                 {
                     message = $"{message} {action.Conclusion}";
                 }
-                LogCore(action.Type, action.Success ? "OK" : "FAIL", message, categoryColor: action.Success ? ConsoleColor.Green : ConsoleColor.Red, start: false);
+                var categoryColor = action.Success ? ConsoleColor.Green : ConsoleColor.Red;
+                var messageColor = action.Success ? ConsoleColor.White : ConsoleColor.Red;
+                LogCore(action.Type, action.Success ? "OK" : "FAIL", message, categoryColor, messageColor, start: false);
             }
 
-            private void LogCore(string category, string status, string message, ConsoleColor categoryColor, bool? start)
+            private void LogCore(string category, string status, string message, ConsoleColor categoryColor, ConsoleColor messageColor, bool? start)
             {
+                // Split the message by lines
                 var startString = start == null ? " " : (start == true ? ">" : "<");
-                _console.Write($"[{category.PadRight(CategoryMaxLength)}{startString}] ", background: null, foreground: categoryColor);
-                _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: ConsoleColor.Blue);
-                _console.Write($"[{status.PadRight(StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
-                _console.WriteLine(message, background: null, foreground: null);
+                foreach (var line in message.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                {
+                    _console.Write($"[{category.PadRight(CategoryMaxLength)}{startString}] ", background: null, foreground: categoryColor);
+                    _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: ConsoleColor.Blue);
+                    _console.Write($"[{status.PadRight(StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
+                    _console.WriteLine(line, background: null, foreground: messageColor);
+                }
             }
 
             private class AnsiSystemConsole : IAnsiSystemConsole

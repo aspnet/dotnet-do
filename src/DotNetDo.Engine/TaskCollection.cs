@@ -75,6 +75,11 @@ namespace DotNetDo.Engine
                     {
                         result = method.Invoke(this, arguments);
                     }
+                    catch(TargetInvocationException tie)
+                    {
+                        success = false;
+                        exception = tie.InnerException;
+                    }
                     catch (Exception ex)
                     {
                         success = false;
