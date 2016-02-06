@@ -36,6 +36,7 @@ namespace DotNetDo.Engine
         {
             services.AddSingleton<ITaskRunner, DefaultTaskRunner>();
             services.AddSingleton<ITaskManager, DefaultTaskManager>();
+            services.AddInstance<TaskContext>(new TaskContext());
         
             // Maybe there's an easier way to do this? I just want to add LoggerFactory AND configure Console logging without
             // having to put the configuration in DefaultTaskRunner...

@@ -19,8 +19,9 @@ namespace DevSandbox
         }
 
         [Task]
-        public void Prepare(ILogger log)
+        public void Prepare(ILogger log, TaskContext context)
         {
+            log.LogInformation($"Running in {context.WorkingDirectory} with tasks from {context.TasksProjectPath}");
             log.LogInformation("The prepare task has run!");
         }
 
