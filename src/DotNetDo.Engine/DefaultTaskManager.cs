@@ -81,6 +81,7 @@ namespace DotNetDo.Engine
             using (_log.BeginScopeImpl(activity))
             {
                 // Run dependencies
+                TaskResult result;
                 var dependencyResults = new Dictionary<string, TaskResult>();
                 foreach (var dependency in task.Dependencies)
                 {
@@ -89,7 +90,7 @@ namespace DotNetDo.Engine
                         throw new InvalidOperationException($"Circular dependency detected at '{dependency.Definition.Name}'");
                     }
 
-                    var result = ExecuteTask(dependency, ChainPredicate(circularDependencyGuard, dependency.Definition.Name));
+                    result = ExecuteTask(dependency, ChainPredicate(circularDependencyGuard, dependency.Definition.Name));
                     if (!result.Success)
                     {
                         return result;
@@ -98,8 +99,9 @@ namespace DotNetDo.Engine
                 }
 
                 // Run the task itself
-                var result = task.Execute(new TaskInvocation(task, _services, dependencyResults));
+                result = task.Execute(new TaskInvocation(task, _services, dependencyResults));
                 activity.Success = result.Success;
+                return result;
             }
         }
 
