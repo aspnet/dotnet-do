@@ -10,6 +10,7 @@ namespace DotNetDo.Engine
     {
         public string TasksProjectPath { get; }
         public string WorkingDirectory { get; }
+        public string ProjectDirectory => Path.GetDirectoryName(Path.GetDirectoryName(TasksProjectPath));
 
         public TaskContext()
         {
