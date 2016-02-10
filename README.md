@@ -6,8 +6,7 @@ I don't know. It's just some thing I'm tinkering with.
 
 ## How do I run it?
 ```
-> cd samples\DevSandbox
-> dnx run
+> dnx -p src/dotnet-do do
 ```
 
 ## How do I use it?
