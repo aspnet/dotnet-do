@@ -1,29 +1,20 @@
 ﻿{
     "version": "1.0.0-*",
-    "description": "dotnet-do Console Application",
+    "description": "DotNetDo.Abstractions Class Library",
     "authors": [ "anurse" ],
 
-    "compilationOptions": {
-        "emitEntryPoint": true
-    },
-
     "dependencies": {
-    },
-
-    "commands": {
-        "do": "run"
+        "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final"
     },
 
     "frameworks": {
-        "dnx451": { },
-        "dnxcore50": {
+        "net451": { },
+        "dotnet5.4": {
             "dependencies": {
                 "Microsoft.CSharp": "4.0.1-beta-23516",
-                "System.Diagnostics.Process": "4.1.0-beta-23516",
                 "System.Collections": "4.0.11-beta-23516",
-                "System.Console": "4.0.0-beta-23516",
                 "System.Linq": "4.0.1-beta-23516",
-                "System.IO.FileSystem": "4.0.1-beta-23516",
+                "System.Runtime": "4.0.21-beta-23516",
                 "System.Threading": "4.0.11-beta-23516"
             }
         }

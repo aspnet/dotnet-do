@@ -10,16 +10,16 @@ namespace DotNetDo.Engine
 {
     public static class TaskCollectionTaskRunnerBuilderExtensions
     {
-        public static TaskRunnerBuilder UseTasksFrom<T>(this TaskRunnerBuilder self) => UseTasksFrom(self, typeof(T));
+        public static ITaskRunnerBuilder UseTasksFrom<T>(this ITaskRunnerBuilder self) => UseTasksFrom(self, typeof(T));
 
-        public static TaskRunnerBuilder UseAllTasksFromAssemblyContaining<T>(this TaskRunnerBuilder self) => UseAllTasksFromAssemblyContaining(self, typeof(T));
+        public static ITaskRunnerBuilder UseAllTasksFromAssemblyContaining<T>(this ITaskRunnerBuilder self) => UseAllTasksFromAssemblyContaining(self, typeof(T));
 
-        public static TaskRunnerBuilder UseTasksFrom(this TaskRunnerBuilder self, Type type)
+        public static ITaskRunnerBuilder UseTasksFrom(this ITaskRunnerBuilder self, Type type)
         {
             return self.UseServices(s => s.AddSingleton(typeof(ITaskProvider), type));
         }
 
-        public static TaskRunnerBuilder UseAllTasksFromAssemblyContaining(this TaskRunnerBuilder self, Type type)
+        public static ITaskRunnerBuilder UseAllTasksFromAssemblyContaining(this ITaskRunnerBuilder self, Type type)
         {
             return self.UseServices(s =>
             {
@@ -36,7 +36,7 @@ namespace DotNetDo.Engine
 
     public abstract class TaskCollection : ITaskProvider
     {
-        public IEnumerable<TaskDefinition> GetTargets() => from m in GetType().GetMethods()
+        public IEnumerable<TaskDefinition> GetTasks() => from m in GetType().GetMethods()
                                                            let attr = m.GetCustomAttribute<TaskAttribute>()
                                                            where attr != null
                                                            select CreateTask(m, attr);

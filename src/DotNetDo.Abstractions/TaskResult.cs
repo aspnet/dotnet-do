@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class TaskResult
     {

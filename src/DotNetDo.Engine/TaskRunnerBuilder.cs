@@ -7,19 +7,19 @@ using Microsoft.Extensions.Logging;
 
 namespace DotNetDo.Engine
 {
-    public class TaskRunnerBuilder
+    public class TaskRunnerBuilder : ITaskRunnerBuilder
     {
         private ServiceCollection _services = new ServiceCollection();
         public TaskRunnerBuilder()
         {
         }
 
-        public static TaskRunnerBuilder CreateDefault()
+        public static ITaskRunnerBuilder CreateDefault()
         {
             return new TaskRunnerBuilder().UseServices(ConfigureDefaultServices);
         }
 
-        public TaskRunnerBuilder UseServices(Action<IServiceCollection> registrar)
+        public ITaskRunnerBuilder UseServices(Action<IServiceCollection> registrar)
         {
             registrar(_services);
             return this;

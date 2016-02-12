@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class TaskInvocation
     {

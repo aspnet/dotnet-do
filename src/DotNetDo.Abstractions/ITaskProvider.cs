@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public interface ITaskProvider
     {
-        IEnumerable<TaskDefinition> GetTargets();
+        IEnumerable<TaskDefinition> GetTasks();
     }
 }
