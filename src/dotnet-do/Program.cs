@@ -38,7 +38,8 @@ namespace DotNetDo.Command
             {
                 FileName = "dnx",
                 Arguments = $"-p {candidate} run {string.Join(" ", args)}",
-                WorkingDirectory = Directory.GetCurrentDirectory()
+                WorkingDirectory = Directory.GetCurrentDirectory(),
+                UseShellExecute = false
             };
 
             // In theory this isn't needed while we're DNX hosted, but when we move to dotnet run, IApplicationEnvironment won't be available.

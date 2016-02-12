@@ -6,9 +6,10 @@ namespace DevSandbox
 {
     public class SomeTasks : TaskCollection
     {
-        [Task(nameof(Prepare), nameof(Compile), nameof(Test), nameof(Package), nameof(Publish))]
+        [Task(nameof(Prepare))]
         public void Default(ILogger log) { }
 
+        [Task]
         public void Prepare(ILogger log, TaskContext context)
         {
         }
