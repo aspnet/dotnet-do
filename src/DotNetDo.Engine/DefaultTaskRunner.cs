@@ -5,10 +5,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class DefaultTaskRunner : ITaskRunner
     {
+        public static readonly string DefaultTask = "Default";
+
         private readonly ILogger<DefaultTaskRunner> _log;
         private ITaskManager _tasks;
 
@@ -27,7 +29,7 @@ namespace DotNetDo.Engine
                 var tasks = args.Tasks;
                 if (!tasks.Any())
                 {
-                    tasks = new[] { Constants.DefaultTask };
+                    tasks = new[] { DefaultTask };
                 }
 
                 foreach (var task in tasks)

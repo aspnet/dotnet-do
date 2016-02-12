@@ -1,4 +1,4 @@
-﻿namespace DotNetDo.Engine
+﻿namespace DotNetDo
 {
     internal class TaskRunnerActivity
     {

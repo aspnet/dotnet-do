@@ -4,22 +4,26 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class DefaultTaskManager : ITaskManager
     {
         private readonly ILogger<DefaultTaskManager> _log;
         private readonly IServiceProvider _services;
 
+        private readonly IDictionary<string, TaskResult> _results = new Dictionary<string, TaskResult>();
+
         public IReadOnlyDictionary<string, TaskNode> Tasks { get; }
+        public IReadOnlyDictionary<string, TaskResult> Results { get; }
         
         public DefaultTaskManager(ILogger<DefaultTaskManager> log, IServiceProvider services, IEnumerable<ITaskProvider> taskProviders)
         {
             _log = log;
             _services = services;
 
-            var tasks = RegisterTasks(taskProviders.SelectMany(p => p.GetTargets()));
+            var tasks = RegisterTasks(taskProviders.SelectMany(p => p.GetTasks()));
             Tasks = new ReadOnlyDictionary<string, TaskNode>(tasks);
+            Results = new ReadOnlyDictionary<string, TaskResult>(_results);
         }
 
         private IDictionary<string, TaskNode> RegisterTasks(IEnumerable<TaskDefinition> tasks)
@@ -99,10 +103,34 @@ namespace DotNetDo.Engine
                 }
 
                 // Run the task itself
-                result = task.Execute(new TaskInvocation(task, _services, dependencyResults));
+                result = ExecuteTask(new TaskInvocation(task, _services, dependencyResults));
                 activity.Success = result.Success;
                 return result;
             }
+        }
+
+        private TaskResult ExecuteTask(TaskInvocation taskInvocation)
+        {
+            TaskResult result;
+            if (_results.TryGetValue(taskInvocation.Task.Definition.Name, out result))
+            {
+                _log.LogDebug("Returning cached result for task: {0}", taskInvocation.Task.Definition.Name);
+                return result;
+            }
+
+            var implementation = taskInvocation.Task.Definition.Implementation;
+            if (implementation == null)
+            {
+                _log.LogDebug("Skipping empty task: {0}", taskInvocation.Task.Definition.Name);
+                result = new TaskResult(taskInvocation.Task, success: true, returnValue: null, exception: null);
+            }
+            else
+            {
+                _log.LogDebug("Executing task: {0}", taskInvocation.Task.Definition.Name);
+                result = implementation(taskInvocation);
+            }
+            _results[taskInvocation.Task.Definition.Name] = result;
+            return result;
         }
 
         private Func<string, bool> ChainPredicate(Func<string, bool> circularDependencyGuard, string name)

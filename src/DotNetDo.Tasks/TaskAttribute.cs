@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class TaskAttribute : Attribute
     {

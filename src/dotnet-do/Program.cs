@@ -34,6 +34,7 @@ namespace DotNetDo.Command
             // Now run the thing!
             // TODO: Convert to dotnet run :)
             // TODO: Argument escaping. Spaces man... Spaces.
+            // TODO: Also NuGet Restore?
             var psi = new ProcessStartInfo()
             {
                 FileName = "dnx",

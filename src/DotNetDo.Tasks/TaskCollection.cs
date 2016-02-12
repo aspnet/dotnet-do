@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public static class TaskCollectionTaskRunnerBuilderExtensions
     {

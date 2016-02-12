@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class TaskRunnerBuilder : ITaskRunnerBuilder
     {
@@ -25,11 +22,11 @@ namespace DotNetDo.Engine
             return this;
         }
 
-        public int Execute(IEnumerable<string> commandLineArgs)
+        public ITaskRunner Build()
         {
             var serviceProvider = _services.BuildServiceProvider();
             var taskRunner = serviceProvider.GetRequiredService<ITaskRunner>();
-            return taskRunner.Execute(commandLineArgs);
+            return taskRunner;
         }
 
         private static void ConfigureDefaultServices(IServiceCollection services)

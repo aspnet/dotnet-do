@@ -1,10 +1,11 @@
 ﻿{
     "version": "1.0.0-*",
-    "description": "DotNetDo.BuildSystem Class Library",
+    "description": "DotNetDo.Tasks Class Library",
     "authors": [ "anurse" ],
 
     "dependencies": {
-        "DotNetDo.Tasks": { "target": "project" }
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+        "DotNetDo.Abstractions": { "target": "project" }
     },
 
     "frameworks": {

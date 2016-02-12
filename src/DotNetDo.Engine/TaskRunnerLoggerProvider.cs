@@ -3,11 +3,8 @@ using Microsoft.Extensions.Logging.Console.Internal;
 using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace DotNetDo.Engine
+namespace DotNetDo
 {
     public class TaskRunnerLoggerProvider : ILoggerProvider
     {
@@ -151,9 +148,23 @@ namespace DotNetDo.Engine
                 {
                     _console.Write($"[{category.PadRight(CategoryMaxLength)}{startString}] ", background: null, foreground: categoryColor);
                     _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: ConsoleColor.Blue);
-                    _console.Write($"[{status.PadRight(StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
+                    _console.Write($"[{PadCenter(status, StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
                     _console.WriteLine(line, background: null, foreground: messageColor);
                 }
+            }
+
+            private string PadCenter(string input, int length)
+            {
+                var padding = length - input.Length;
+
+                if(padding < 2)
+                {
+                    return input;
+                }
+
+                var leftPadding = (int)Math.Floor((double)padding / 2.0);
+                var rightPadding = (int)Math.Ceiling((double)padding / 2.0);
+                return new string(' ', leftPadding) + input + new string(' ', rightPadding);
             }
 
             private class AnsiSystemConsole : IAnsiSystemConsole
