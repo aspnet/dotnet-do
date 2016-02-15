@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F069C1AF-5803-4CB8-ADE3-4D63AC486D03}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-do", "src\dotnet-do\dotnet-do.xproj", "{0D7108E1-CDA5-4227-840B-DD5FEB76AB30}"
@@ -23,6 +24,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotNetDo.BuildSystem.ManagedCode", "src\DotNetDo.BuildSystem.ManagedCode\DotNetDo.BuildSystem.ManagedCode.xproj", "{B249967D-1670-48EB-BEBE-0B379D28AA27}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotNetDo.Tasks", "src\DotNetDo.Tasks\DotNetDo.Tasks.xproj", "{A9D823FD-4B57-414B-98CE-A5E74E9C63C5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DotNetDo.Helpers", "src\DotNetDo.Helpers\DotNetDo.Helpers.xproj", "{BF5ED686-D717-4722-B71E-76FE47331D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +61,10 @@ Global
 		{A9D823FD-4B57-414B-98CE-A5E74E9C63C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D823FD-4B57-414B-98CE-A5E74E9C63C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9D823FD-4B57-414B-98CE-A5E74E9C63C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5ED686-D717-4722-B71E-76FE47331D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5ED686-D717-4722-B71E-76FE47331D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5ED686-D717-4722-B71E-76FE47331D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5ED686-D717-4722-B71E-76FE47331D15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +76,6 @@ Global
 		{88A55A16-1861-4ADB-8799-96379155580D} = {2AA411A5-5F2D-4BF2-B64C-A0C78BCC6875}
 		{B249967D-1670-48EB-BEBE-0B379D28AA27} = {2AA411A5-5F2D-4BF2-B64C-A0C78BCC6875}
 		{A9D823FD-4B57-414B-98CE-A5E74E9C63C5} = {2AA411A5-5F2D-4BF2-B64C-A0C78BCC6875}
+		{BF5ED686-D717-4722-B71E-76FE47331D15} = {2AA411A5-5F2D-4BF2-B64C-A0C78BCC6875}
 	EndGlobalSection
 EndGlobal

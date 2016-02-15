@@ -34,7 +34,7 @@ namespace DotNetDo
                 TaskNode oldTask;
                 if (graph.TryGetValue(task.Name, out oldTask))
                 {
-                    _log.LogVerbose("Overriding task {0} defined in {1} by the definition in {2}", task.Name, oldTask.Definition.Source, task.Source);
+                    _log.LogTrace("Overriding task {0} defined in {1} by the definition in {2}", task.Name, oldTask.Definition.Source, task.Source);
                 }
 
                 graph[task.Name] = new TaskNode(task);
@@ -81,8 +81,13 @@ namespace DotNetDo
 
         private TaskResult ExecuteTask(TaskNode task, Func<string, bool> circularDependencyGuard)
         {
-            var activity = new TaskRunnerActivity("TASK", task.Definition.Name);
-            using (_log.BeginScopeImpl(activity))
+            if(!task.Dependencies.Any() && task.Definition.Implementation == null)
+            {
+                _log.LogTrace($"Skipping empty task: {task.Definition.Name}");
+                return new TaskResult(task, success: true, returnValue: null, exception: null);
+            }
+
+            using (var activity = _log.BeginActivity("TASK", task.Definition.Name))
             {
                 // Run dependencies
                 TaskResult result;
@@ -104,7 +109,14 @@ namespace DotNetDo
 
                 // Run the task itself
                 result = ExecuteTask(new TaskInvocation(task, _services, dependencyResults));
+
                 activity.Success = result.Success;
+
+                if (result.Exception != null)
+                {
+                    activity.Conclusion = $"failed with {result.Exception.GetType().Name}: {result.Exception.Message}";
+                }
+
                 return result;
             }
         }
@@ -114,19 +126,19 @@ namespace DotNetDo
             TaskResult result;
             if (_results.TryGetValue(taskInvocation.Task.Definition.Name, out result))
             {
-                _log.LogDebug("Returning cached result for task: {0}", taskInvocation.Task.Definition.Name);
+                _log.LogTrace("Returning cached result for task: {0}", taskInvocation.Task.Definition.Name);
                 return result;
             }
 
             var implementation = taskInvocation.Task.Definition.Implementation;
             if (implementation == null)
             {
-                _log.LogDebug("Skipping empty task: {0}", taskInvocation.Task.Definition.Name);
+                _log.LogTrace("Skipping empty task: {0}", taskInvocation.Task.Definition.Name);
                 result = new TaskResult(taskInvocation.Task, success: true, returnValue: null, exception: null);
             }
             else
             {
-                _log.LogDebug("Executing task: {0}", taskInvocation.Task.Definition.Name);
+                _log.LogTrace("Executing task: {0}", taskInvocation.Task.Definition.Name);
                 result = implementation(taskInvocation);
             }
             _results[taskInvocation.Task.Definition.Name] = result;

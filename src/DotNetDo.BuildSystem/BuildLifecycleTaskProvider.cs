@@ -87,9 +87,7 @@ namespace DotNetDo.BuildSystem
 
         private TaskDefinition CreateStandardLifecycleTask(string name, params string[] dependencies)
         {
-            return new TaskDefinition(name, typeof(BuildLifecycleTaskProvider).FullName, dependencies, runBefore: null, implementation: DefaultImplementation);
+            return new TaskDefinition(name, typeof(BuildLifecycleTaskProvider).FullName, dependencies, runBefore: null, implementation: null);
         }
-
-        private TaskResult DefaultImplementation(TaskInvocation arg) => new TaskResult(arg.Task, success: true, returnValue: null, exception: null);
     }
 }

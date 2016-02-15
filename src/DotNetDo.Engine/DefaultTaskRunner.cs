@@ -38,7 +38,7 @@ namespace DotNetDo
                     if(!result.Success)
                     {
                         _log.LogError("Task '{0}' failed: '{1}'", result.Task.Definition.Name, result.Exception.Message);
-                        _log.LogVerbose("Exception details: {0}", result.Exception);
+                        _log.LogTrace("Exception details: {0}", result.Exception);
                         return 1;
                     }
                 }

@@ -1,23 +1,26 @@
 ﻿{
-    "version": "1.0.0-*",
+    "version": "0.1.0-*",
     "description": "DotNetDo.BuildSystem.ManagedCode Class Library",
     "authors": [ "anurse" ],
 
     "dependencies": {
-        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-*",
+        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-*",
 
-        "DotNetDo.BuildSystem": { "target": "project" }
+        "DotNetDo.BuildSystem": "0.1.0-*"
     },
 
     "frameworks": {
         "net451": { },
         "dotnet5.4": {
             "dependencies": {
-                "Microsoft.CSharp": "4.0.1-beta-23516",
-                "System.Collections": "4.0.11-beta-23516",
-                "System.Linq": "4.0.1-beta-23516",
-                "System.Runtime": "4.0.21-beta-23516",
-                "System.Threading": "4.0.11-beta-23516"
+                "System.IO": "4.1.0-rc2-23811",
+                "System.IO.FileSystem": "4.0.1-rc2-23811",
+                "Microsoft.CSharp": "4.0.1-rc2-23811",
+                "System.Collections": "4.0.11-rc2-23811",
+                "System.Linq": "4.0.2-rc2-23811",
+                "System.Runtime": "4.1.0-rc2-23811",
+                "System.Threading": "4.0.11-rc2-23811"
             }
         }
     }

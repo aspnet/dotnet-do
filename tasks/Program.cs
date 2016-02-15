@@ -2,13 +2,13 @@
 using DotNetDo.BuildSystem;
 using DotNetDo.BuildSystem.ManagedCode;
 
-namespace DevSandbox
+namespace tasks
 {
     public class Program
     {
         public static int Main(string[] args) => TaskRunnerBuilder.CreateDefault()
             .UseBuildLifecycle()
-            .UseNuGetRestore()
+            .UseDotNetRestore("src", "test")
             .Execute(args);
     }
 }

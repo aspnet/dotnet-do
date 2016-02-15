@@ -1,7 +1,25 @@
 @echo off
 
+setlocal
+
+cd %~dp0
+
 echo Restoring packages for build tasks
-dnu restore "%~dp0tasks" >nul
+dotnet restore
+if errorlevel 1 goto fail
+
+echo Building build tasks
+dotnet build --framework dnxcore50 "%~dp0tasks"
+if errorlevel 1 goto fail
 
 echo Running build tasks
-dnx -p "%~dp0tasks" run
+%~dp0\tasks\bin\Debug\dnxcore50\tasks.exe %*
+if errorlevel 1 goto fail
+
+echo Build completed
+goto end
+
+:fail
+echo Build failed
+
+:end

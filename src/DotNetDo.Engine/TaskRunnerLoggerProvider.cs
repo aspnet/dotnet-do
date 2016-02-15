@@ -84,7 +84,7 @@ namespace DotNetDo
                 return _filter(_categoryName, logLevel);
             }
 
-            public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
                 var categoryColor = ConsoleColor.White;
                 var messageColor = ConsoleColor.White;
@@ -92,11 +92,11 @@ namespace DotNetDo
                 switch (logLevel)
                 {
                     case LogLevel.Debug:
-                        categoryColor = ConsoleColor.Magenta;
-                        messageColor = ConsoleColor.Magenta;
+                        categoryColor = ConsoleColor.DarkMagenta;
+                        messageColor = ConsoleColor.DarkMagenta;
                         category = "DEBUG";
                         break;
-                    case LogLevel.Verbose:
+                    case LogLevel.Trace:
                         categoryColor = ConsoleColor.DarkGray;
                         messageColor = ConsoleColor.DarkGray;
                         category = "TRACE";

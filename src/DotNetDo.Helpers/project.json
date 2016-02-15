@@ -1,23 +1,22 @@
 {
     "version": "0.1.0-*",
-    "description": "DotNetDo.Engine Class Library",
+    "description": "DotNetDo.Helpers Class Library",
+    "authors": [ "Andrew" ],
 
     "dependencies": {
-        "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-*",
-        "Microsoft.Extensions.Logging": "1.0.0-rc2-*",
-        "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
-
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-*",
+        "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-*",
         "DotNetDo.Abstractions": "0.1.0-*",
-        "DotNetDo.Helpers": "0.1.0-*"
     },
 
     "frameworks": {
         "net451": { },
         "dotnet5.4": {
             "dependencies": {
-                "Microsoft.CSharp": "4.0.1-rc2-23811",
+                "System.Runtime.InteropServices.RuntimeInformation": "4.0.0-rc2-23811",
+                "System.IO.FileSystem": "4.0.1-rc2-23811",
                 "System.Diagnostics.Process": "4.1.0-rc2-23811",
-                "System.IO.FileSystem":  "4.0.1-rc2-23811",
+                "Microsoft.CSharp": "4.0.1-rc2-23811",
                 "System.Collections": "4.0.11-rc2-23811",
                 "System.Linq": "4.0.2-rc2-23811",
                 "System.Runtime": "4.1.0-rc2-23811",

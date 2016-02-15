@@ -6,7 +6,7 @@ namespace DotNetDo.BuildSystem
     {
         public static ITaskRunnerBuilder UseBuildLifecycle(this ITaskRunnerBuilder self)
         {
-            return self.UseServices(s => s.Add(ServiceDescriptor.Instance(typeof(ITaskProvider), new BuildLifecycleTaskProvider())));
+            return self.UseServices(s => s.AddSingleton<ITaskProvider>(new BuildLifecycleTaskProvider()));
         }
     }
 }

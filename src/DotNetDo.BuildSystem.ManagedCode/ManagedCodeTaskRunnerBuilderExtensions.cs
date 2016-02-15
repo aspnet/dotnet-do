@@ -1,23 +1,29 @@
-﻿using DotNetDo.BuildSystem.ManagedCode.NuGet;
+﻿using System.Linq;
+using DotNetDo.BuildSystem.ManagedCode.DotNet;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DotNetDo.BuildSystem.ManagedCode
 {
     public static class ManagedCodeTaskRunnerBuilderExtensions
     {
-        public static ITaskRunnerBuilder UseNuGetRestore(this ITaskRunnerBuilder self) => UseNuGetRestore(self, new NuGetRestoreTaskOptions());
+        public static ITaskRunnerBuilder UseDotNetRestore(this ITaskRunnerBuilder self) => UseDotNetRestore(self, new NuGetRestoreTaskOptions(Enumerable.Empty<string>()));
 
-        public static ITaskRunnerBuilder UseNuGetRestore(this ITaskRunnerBuilder self, params string[] directoriesToRestore) => UseNuGetRestore(self, new NuGetRestoreTaskOptions(directoriesToRestore));
+        public static ITaskRunnerBuilder UseDotNetRestore(this ITaskRunnerBuilder self, params string[] directoriesToRestore) => UseDotNetRestore(self, new NuGetRestoreTaskOptions(directoriesToRestore));
 
-        public static ITaskRunnerBuilder UseNuGetRestore(this ITaskRunnerBuilder self, NuGetRestoreTaskOptions options)
+        public static ITaskRunnerBuilder UseDotNetRestore(this ITaskRunnerBuilder self, NuGetRestoreTaskOptions options)
         {
+            self.UseDotNetCliCore();
             return self.UseServices(
-                ServiceDescriptor.Instance(options),
-                ServiceDescriptor.Instance<ITaskProvider>(new NuGetRestoreTask()));
+                ServiceDescriptor.Singleton(options),
+                ServiceDescriptor.Singleton<ITaskProvider>(new DotNetRestoreTask()));
+        }
+
+        private static void UseDotNetCliCore(this ITaskRunnerBuilder self)
+        {
+            if(!self.HasService(typeof(DotNetCliCoreTasks)))
+            {
+                self.UseServices(ServiceDescriptor.Singleton<ITaskProvider>(new DotNetCliCoreTasks()));
+            }
         }
     }
 }
