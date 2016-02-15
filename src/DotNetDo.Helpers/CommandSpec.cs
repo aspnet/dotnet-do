@@ -9,12 +9,12 @@ namespace DotNetDo.Helpers
         public IEnumerable<string> Arguments { get; }
 
         // Naive argument escaping
-        public string EscapedArguments => string.Join(" ", Arguments.Select(a => $"\"{a}\""));
+        public string EscapedArguments => Arguments == null ? string.Empty : string.Join(" ", Arguments.Select(a => $"\"{a}\""));
 
         public CommandSpec(string command, IEnumerable<string> args) : this()
         {
             Command = command;
-            Arguments = args;
+            Arguments = args ?? Enumerable.Empty<string>();
         }
 
         public override string ToString()

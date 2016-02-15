@@ -7,8 +7,11 @@ namespace tasks
     public class Program
     {
         public static int Main(string[] args) => TaskRunnerBuilder.CreateDefault()
-            .UseBuildLifecycle()
+            .UseStandardBuildSystem()
+            .UseCleanDirectories("artifacts")
             .UseDotNetRestore("src", "test")
+            .UseDotNetBuild("src/*/project.json")
+            .UseDotNetPack("artifacts", "src/*/project.json", "!src/dotnet-do/project.json")
             .Execute(args);
     }
 }

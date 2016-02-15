@@ -7,15 +7,17 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
 {
     public class DotNetRestoreTask : TaskCollection
     {
+        public static readonly string Name = nameof(RestoreNuGetPackages);
+
         [Task(RunBefore = BuildLifecycle.InitializeCore)]
-        public void RestoreNuGetPackages(ILogger log, NuGetRestoreTaskOptions options, CommandHelper exec)
+        public void RestoreNuGetPackages(ILogger log, NuGetRestoreTaskOptions options, CommandHelper cmd)
         {
             foreach (var dir in options.TargetDirectories)
             {
                 if (Directory.Exists(dir))
                 {
-                    log.LogInformation("Restoring packages in {0}", dir);
-                    exec.Create(DotNetCli.Default.Restore())
+                    log.LogTrace("Restoring packages in {0}", dir);
+                    cmd.Create(DotNetCli.Default.Restore())
                         .WorkingDirectory(dir)
                         .Execute()
                         .EnsureSuccessful();

@@ -21,7 +21,9 @@
 
         public CommandResult Exec(CommandSpec spec)
         {
-            return new Command(spec, _executor).Execute();
+            var result = new Command(spec, _executor).Execute();
+            result.EnsureSuccessful();
+            return result;
         }
 
         public CommandResult Exec(string command, params string[] args)

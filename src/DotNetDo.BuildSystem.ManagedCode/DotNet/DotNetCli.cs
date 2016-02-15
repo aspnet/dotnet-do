@@ -21,6 +21,7 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
         }
 
         public CommandSpec Command(IEnumerable<string> args) => new CommandSpec(DriverPath, args);
+
         public CommandSpec Command(params string[] args) => new CommandSpec(DriverPath, args);
 
         public CommandSpec Restore(IEnumerable<string> args) => new CommandSpec(DriverPath, GetArgs("restore", args));
@@ -28,6 +29,9 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
 
         public CommandSpec Build(IEnumerable<string> args) => new CommandSpec(DriverPath, GetArgs("build", args));
         public CommandSpec Build(params string[] args) => new CommandSpec(DriverPath, GetArgs("build", args));
+
+        public CommandSpec Pack(IEnumerable<string> args) => new CommandSpec(DriverPath, GetArgs("pack", args));
+        public CommandSpec Pack(params string[] args) => new CommandSpec(DriverPath, GetArgs("pack", args));
 
         public CommandSpec Run(IEnumerable<string> args) => new CommandSpec(DriverPath, GetArgs("run", args));
         public CommandSpec Run(params string[] args) => new CommandSpec(DriverPath, GetArgs("run", args));

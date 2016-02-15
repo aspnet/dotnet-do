@@ -32,19 +32,18 @@ namespace DotNetDo.Command
             }
 
             // Now run the thing!
-            // TODO: Convert to dotnet run :)
             // TODO: Argument escaping. Spaces man... Spaces.
             // TODO: Also NuGet Restore?
             var psi = new ProcessStartInfo()
             {
-                FileName = "dnx",
-                Arguments = $"-p {candidate} run {string.Join(" ", args)}",
+                FileName = "dotnet",
+                Arguments = $"run --project {candidate} {string.Join(" ", args.Select(a => $"\"{a}\""))}",
                 WorkingDirectory = Directory.GetCurrentDirectory(),
                 UseShellExecute = false
             };
 
             // In theory this isn't needed while we're DNX hosted, but when we move to dotnet run, IApplicationEnvironment won't be available.
-#if DNX451
+#if NET451
             psi.EnvironmentVariables["DOTNET_DO_PROJECT"] = candidate;
 #else
             psi.Environment["DOTNET_DO_PROJECT"] = candidate;

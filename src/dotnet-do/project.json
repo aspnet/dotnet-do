@@ -18,7 +18,8 @@
         "net451": { },
         "dnxcore50": {
             "dependencies": {
-                "NETStandard.Library": "1.0.0-rc2-23811"
+                "NETStandard.Library": "1.0.0-rc2-23811",
+                "System.Diagnostics.Process": "4.1.0-rc2-23811"
             }
         }
     }

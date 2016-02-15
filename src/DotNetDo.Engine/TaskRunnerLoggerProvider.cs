@@ -8,7 +8,7 @@ namespace DotNetDo
 {
     public class TaskRunnerLoggerProvider : ILoggerProvider
     {
-        public static readonly int CategoryMaxLength = 7;
+        public static readonly int CategoryMaxLength = 10;
         public static readonly int StatusMaxLength = 4;
         private readonly Func<string, LogLevel, bool> _filter;
         private readonly ConcurrentDictionary<string, TaskRunnerLogger> _loggers = new ConcurrentDictionary<string, TaskRunnerLogger>();
