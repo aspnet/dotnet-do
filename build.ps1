@@ -1,7 +1,5 @@
 cd $PSScriptRoot
 
-throw "Boom"
-
 if(!(Get-Command dotnet -ErrorAction SilentlyContinue))
 {
 	Write-Host "Installing dotnet-cli"
