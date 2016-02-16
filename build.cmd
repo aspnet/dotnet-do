@@ -1,3 +1,2 @@
 @echo off
-powershell -NoProfile -NoLogo -File %~dp0\build.ps1 %*
-exit %errorlevel%
+powershell -NoProfile -NoLogo -NonInteractive -Command "%~dp0build.ps1" %*

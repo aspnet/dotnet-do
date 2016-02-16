@@ -1,6 +1,6 @@
 cd $PSScriptRoot
 
-$ErrorActionPreference="Stop"
+throw "Boom"
 
 if(!(Get-Command dotnet -ErrorAction SilentlyContinue))
 {
