@@ -1,5 +1,7 @@
 cd $PSScriptRoot
 
+$ErrorActionPreference="Stop"
+
 if(!(Get-Command dotnet -ErrorAction SilentlyContinue))
 {
 	Write-Host "Installing dotnet-cli"
