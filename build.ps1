@@ -1,9 +1,11 @@
 cd $PSScriptRoot
 
+throw "Boom"
+
 if(!(Get-Command dotnet -ErrorAction SilentlyContinue))
 {
 	Write-Host "Installing dotnet-cli"
-	iwr -UseBasicParsing https://github.com/dotnet/cli/blob/rel/1.0.0/scripts/obtain/install.ps1 | iex
+	iwr "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1" | iex -Channel beta
 }
 
 Write-Host "Restoring packages for build tasks"
