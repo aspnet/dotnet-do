@@ -19,7 +19,12 @@ Write-Host "Restoring packages for build tasks"
 if($LASTEXITCODE -ne 0) { throw "Build failed" }
 
 Write-Host "Building build tasks"
-del -rec -for "$PSScriptRoot\tasks\bin\app"
+
+if (Test-Path "$PSScriptRoot\tasks\bin\app")
+{
+    del -rec -for "$PSScriptRoot\tasks\bin\app"
+}
+
 & "$dotnet" build --framework dnxcore50 "$PSScriptRoot\tasks" -o "$PSScriptRoot\tasks\bin\app"
 if($LASTEXITCODE -ne 0) { throw "Build failed" }
 
