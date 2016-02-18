@@ -2,15 +2,13 @@ cd $PSScriptRoot
 
 $ErrorActionPreference="Stop"
 
-if(!(Get-Command dotnet -ErrorAction SilentlyContinue))
-{
-    Write-Host "Installing dotnet-cli"
-    $dotnetInstall = "$PSScriptRoot\dotnet_install.ps1"
-    iwr https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1 -OutFile $dotnetInstall
-    & $dotnetInstall -Channel beta
-}
+Write-Host "Installing dotnet-cli"
+$dotnetInstall = "$PSScriptRoot\dotnet_install.ps1"
+iwr https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1 -OutFile $dotnetInstall
+& $dotnetInstall -Channel beta
+
 $dotnetPath = (Get-Command dotnet).Definition
-Write-Host "Using existing CLI at: $dotnetPath"
+Write-Host "Using CLI from: $dotnetPath"
 
 Write-Host "Restoring packages for build tasks"
 dotnet restore
