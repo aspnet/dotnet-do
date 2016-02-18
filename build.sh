@@ -17,7 +17,7 @@ curl -s https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/in
 DOTNET="$DOTNET_INSTALL_DIR/share/dotnet/cli/bin/dotnet"
 
 echo "Restoring packages for build tasks"
-$DOTNET restore
+$DOTNET restore --verbosity Verbose
 
 echo "Building build tasks"
 rm -Rf "$DIR/tasks/bin/app"

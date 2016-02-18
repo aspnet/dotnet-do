@@ -14,7 +14,7 @@ $dotnet = Join-Path $env:DOTNET_INSTALL_DIR "cli\bin\dotnet.exe"
 Write-Host "Using CLI from: $dotnet"
 
 Write-Host "Restoring packages for build tasks"
-& "$dotnet" restore
+& "$dotnet" restore --verbosity Verbose
 if($LASTEXITCODE -ne 0) { throw "Build failed" }
 
 Write-Host "Building build tasks"
