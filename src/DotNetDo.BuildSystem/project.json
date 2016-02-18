@@ -1,11 +1,11 @@
 ﻿{
-    "version": "0.1.0-*",
+    "version": "0.2.0-*",
     "description": "DotNetDo.BuildSystem Class Library",
     "authors": [ "anurse" ],
 
     "dependencies": {
-        "DotNetDo.Tasks": "0.1.0-*",
-        "DotNetDo.Helpers": "0.1.0-*"
+        "DotNetDo.Tasks": "0.2.0-*",
+        "DotNetDo.Helpers": "0.2.0-*"
     },
 
     "frameworks": {

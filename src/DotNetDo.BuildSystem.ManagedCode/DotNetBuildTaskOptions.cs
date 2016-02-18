@@ -4,7 +4,8 @@ namespace DotNetDo.BuildSystem.ManagedCode
 {
     public class DotNetBuildTaskOptions
     {
-        public IEnumerable<string> ProjectGlobs { get; }
+        public IEnumerable<string> ProjectGlobs { get; set; }
+        public string VersionSuffix { get; set; }
 
         public DotNetBuildTaskOptions(IEnumerable<string> projectGlobs)
         {

@@ -1,11 +1,11 @@
 ﻿{
-    "version": "0.1.0-*",
+    "version": "0.2.0-*",
     "description": "DotNetDo.Tasks Class Library",
     "authors": [ "anurse" ],
 
     "dependencies": {
         "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-*",
-        "DotNetDo.Abstractions": "0.1.0-*"
+        "DotNetDo.Abstractions": "0.2.0-*"
     },
 
     "frameworks": {

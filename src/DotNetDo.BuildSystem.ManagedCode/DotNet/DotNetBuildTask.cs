@@ -13,7 +13,15 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
             foreach(var project in fs.Files(options.ProjectGlobs))
             {
                 log.LogTrace("Building {0}", project.FullName);
-                cmd.Exec(DotNetCli.Default.Build(project.FullName));
+
+                var args = new List<string>();
+                args.Add(project.FullName);
+                if (!string.IsNullOrEmpty(options.VersionSuffix))
+                {
+                    args.Add("--version-suffix");
+                    args.Add(options.VersionSuffix);
+                }
+                cmd.Exec(DotNetCli.Default.Build(args));
             }
         }
     }

@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0-*",
+    "version": "0.2.0-*",
     "description": "DotNetDo.Helpers Class Library",
     "authors": [ "Andrew" ],
 
@@ -7,7 +7,7 @@
         "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-*",
         "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-*",
         "Microsoft.Extensions.FileSystemGlobbing": "1.0.0-rc2-*",
-        "DotNetDo.Abstractions": "0.1.0-*"
+        "DotNetDo.Abstractions": "0.2.0-*"
     },
 
     "frameworks": {
