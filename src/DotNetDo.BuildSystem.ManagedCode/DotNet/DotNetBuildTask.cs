@@ -1,4 +1,5 @@
-﻿using DotNetDo.Helpers;
+﻿using System.Collections.Generic;
+using DotNetDo.Helpers;
 using Microsoft.Extensions.Logging;
 
 namespace DotNetDo.BuildSystem.ManagedCode.DotNet
