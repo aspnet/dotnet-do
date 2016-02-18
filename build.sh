@@ -13,6 +13,7 @@ set -e
 echo "Installing dotnet-cli"
 export DOTNET_INSTALL_DIR="$DIR/.dotnet"
 curl -s https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh | sh -s -- --channel beta
+export DOTNET_CLI_PATH="$DOTNET_INSTALL_DIR/cli"
 
 DOTNET="$DOTNET_INSTALL_DIR/share/dotnet/cli/bin/dotnet"
 

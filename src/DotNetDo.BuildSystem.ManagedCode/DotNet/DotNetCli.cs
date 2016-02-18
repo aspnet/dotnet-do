@@ -55,7 +55,13 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
 
         private static DotNetCli GetDefaultCli()
         {
-            if (PlatformServices.Default.Runtime.OperatingSystemPlatform == Platform.Windows)
+            // Hacky!
+            var cliPath = Environment.GetEnvironmentVariable("DOTNET_CLI_PATH");
+            if (!string.IsNullOrEmpty(cliPath))
+            {
+                return new DotNetCli(cliPath);
+            }
+            else if (PlatformServices.Default.Runtime.OperatingSystemPlatform == Platform.Windows)
             {
                 return new DotNetCli(Path.Combine(
                     Environment.GetEnvironmentVariable("LOCALAPPDATA"),

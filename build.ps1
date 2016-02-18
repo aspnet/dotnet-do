@@ -11,6 +11,7 @@ iwr https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/instal
 del $dotnetInstall
 
 $dotnet = Join-Path $env:DOTNET_INSTALL_DIR "cli\bin\dotnet.exe"
+$env:DOTNET_CLI_PATH = Join-Path $env:DOTNET_INSTALL_DIR "cli"
 Write-Host "Using CLI from: $dotnet"
 
 Write-Host "Restoring packages for build tasks"
