@@ -42,14 +42,7 @@ namespace DotNetDo
             services.AddSingleton<ITaskManager, DefaultTaskManager>();
             services.AddSingleton(CreateContext());
 
-            // Maybe there's an easier way to do this? I just want to add LoggerFactory AND configure Console logging without
-            // having to put the configuration in DefaultTaskRunner...
-            var loggerFactory = new LoggerFactory();
-
-            // TODO: Add a real filter
-            loggerFactory.AddProvider(new TaskRunnerLoggerProvider((s, l) => true));
-
-            services.AddSingleton<ILoggerFactory>(loggerFactory);
+            services.AddSingleton<ILoggerFactory, LoggerFactory>();
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
         }
 

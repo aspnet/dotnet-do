@@ -12,12 +12,14 @@ namespace DotNetDo
         public static readonly string DefaultTask = "Default";
 
         private readonly ILogger<DefaultTaskRunner> _log;
+        private readonly ILoggerFactory _loggerFactory;
         private ITaskManager _tasks;
 
-        public DefaultTaskRunner(ILogger<DefaultTaskRunner> log, ITaskManager tasks)
+        public DefaultTaskRunner(ILogger<DefaultTaskRunner> log, ILoggerFactory loggerFactory, ITaskManager tasks)
         {
             _log = log;
             _tasks = tasks;
+            _loggerFactory = loggerFactory;
         }
 
         public int Execute(IEnumerable<string> commandLineArgs)
@@ -25,6 +27,8 @@ namespace DotNetDo
             try
             {
                 var args = ParseArguments(commandLineArgs);
+
+                _loggerFactory.AddProvider(new TaskRunnerLoggerProvider((s, l) => args.Verbose ? true : l >= LogLevel.Information));
 
                 var tasks = args.Tasks;
                 if (!tasks.Any())

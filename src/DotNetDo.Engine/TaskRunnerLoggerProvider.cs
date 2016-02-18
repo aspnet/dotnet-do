@@ -8,7 +8,7 @@ namespace DotNetDo
 {
     public class TaskRunnerLoggerProvider : ILoggerProvider
     {
-        public static readonly int CategoryMaxLength = 10;
+        public static readonly int CategoryMaxLength = 9;
         public static readonly int StatusMaxLength = 4;
         private readonly Func<string, LogLevel, bool> _filter;
         private readonly ConcurrentDictionary<string, TaskRunnerLogger> _loggers = new ConcurrentDictionary<string, TaskRunnerLogger>();
@@ -87,6 +87,11 @@ namespace DotNetDo
 
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
+                if (!_filter(_categoryName, logLevel))
+                {
+                    return;
+                }
+
                 var categoryColor = ConsoleColor.White;
                 var messageColor = ConsoleColor.White;
                 var category = "LOG";
@@ -148,7 +153,7 @@ namespace DotNetDo
                 foreach (var line in message.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     _console.Write($"[{category.PadRight(CategoryMaxLength)}{startString}] ", background: null, foreground: categoryColor);
-                    _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: messageColor != ConsoleColor.White ? messageColor : ConsoleColor.Blue);
+                    _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ff")}] ", background: null, foreground: messageColor != ConsoleColor.White ? messageColor : ConsoleColor.Blue);
                     _console.Write($"[{PadCenter(status, StatusMaxLength)}] ", background: null, foreground: messageColor != ConsoleColor.White ? messageColor : ConsoleColor.Yellow);
                     _console.WriteLine(line, background: null, foreground: messageColor);
                     _console.Flush();
