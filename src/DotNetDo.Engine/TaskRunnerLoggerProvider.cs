@@ -148,8 +148,8 @@ namespace DotNetDo
                 foreach (var line in message.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     _console.Write($"[{category.PadRight(CategoryMaxLength)}{startString}] ", background: null, foreground: categoryColor);
-                    _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: ConsoleColor.Blue);
-                    _console.Write($"[{PadCenter(status, StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
+                    _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: messageColor != ConsoleColor.White ? messageColor : ConsoleColor.Blue);
+                    _console.Write($"[{PadCenter(status, StatusMaxLength)}] ", background: null, foreground: messageColor != ConsoleColor.White ? messageColor : ConsoleColor.Yellow);
                     _console.WriteLine(line, background: null, foreground: messageColor);
                     _console.Flush();
                 }
