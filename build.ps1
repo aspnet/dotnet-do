@@ -8,8 +8,9 @@ $dotnetInstall = "$PSScriptRoot\dotnet_install.ps1"
 $env:DOTNET_INSTALL_DIR="$PSScriptRoot\.dotnet"
 iwr https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1 -OutFile $dotnetInstall
 & $dotnetInstall -Channel beta
+del $dotnetInstall
 
-$dotnet = Join-Path $env:DOTNET_INSTALL_DIR "bin\dotnet.exe"
+$dotnet = Join-Path $env:DOTNET_INSTALL_DIR "cli\bin\dotnet.exe"
 Write-Host "Using CLI from: $dotnet"
 
 Write-Host "Restoring packages for build tasks"
