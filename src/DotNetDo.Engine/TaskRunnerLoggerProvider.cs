@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console.Internal;
 using Microsoft.Extensions.PlatformAbstractions;
 using System;
 using System.Collections.Concurrent;
+using DotNetDo.Internal;
 
 namespace DotNetDo
 {
@@ -55,10 +55,11 @@ namespace DotNetDo
                 _filter = filter;
                 _provider = provider;
 
-                if(PlatformServices.Default.Runtime.OperatingSystem.Equals("Windows", StringComparison.OrdinalIgnoreCase))
+                if (PlatformServices.Default.Runtime.OperatingSystemPlatform == Platform.Windows)
                 {
                     _console = new WindowsLogConsole();
-                } else
+                }
+                else
                 {
                     _console = new AnsiLogConsole(new AnsiSystemConsole());
                 }
@@ -150,6 +151,7 @@ namespace DotNetDo
                     _console.Write($"[{_provider.GetTimeOffset().ToString(@"hh\:mm\:ss\.ffffff")}] ", background: null, foreground: ConsoleColor.Blue);
                     _console.Write($"[{PadCenter(status, StatusMaxLength)}] ", background: null, foreground: ConsoleColor.Yellow);
                     _console.WriteLine(line, background: null, foreground: messageColor);
+                    _console.Flush();
                 }
             }
 

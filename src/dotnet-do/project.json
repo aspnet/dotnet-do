@@ -15,7 +15,6 @@
     },
 
     "frameworks": {
-        "net451": { },
         "dnxcore50": {
             "dependencies": {
                 "NETStandard.Library": "1.0.0-rc2-23811",
