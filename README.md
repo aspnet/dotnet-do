@@ -1,16 +1,8 @@
-# dotnet-do
-'dotnet do' Task Runner written in any .NET language (C#, VB, F#, etc.)
+dotnet-do
+=========
+AppVeyor: TODO
+Travis:   TODO
 
-## What is this?
-I don't know. It's just some thing I'm tinkering with.
+.NET Task Runner
 
-## How do I run it?
-```
-> dnx -p src/dotnet-do do
-```
-
-## How do I use it?
-I don't know, read the code already :)
-
-## Is there anything you *do* know?
-I enjoy pie.
+This project is part of ASP.NET Core. You can find samples, documentation and getting started instructions for ASP.NET Core at the [Home](https://github.com/aspnet/home) repo.
