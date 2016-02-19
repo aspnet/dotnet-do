@@ -15,8 +15,10 @@ $env:DOTNET_CLI_PATH = Join-Path $env:DOTNET_INSTALL_DIR "cli"
 Write-Host "Using CLI from: $dotnet"
 
 Write-Host "Restoring packages for build tasks"
+pushd "$PSScriptRoot\tasks"
 & "$dotnet" restore
 if($LASTEXITCODE -ne 0) { throw "Build failed" }
+popd
 
 Write-Host "Building build tasks"
 

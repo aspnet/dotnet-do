@@ -18,7 +18,9 @@ export DOTNET_CLI_PATH="$DOTNET_INSTALL_DIR/share/dotnet/cli"
 DOTNET="$DOTNET_INSTALL_DIR/share/dotnet/cli/bin/dotnet"
 
 echo "Restoring packages for build tasks"
+pushd "$DIR/tasks"
 $DOTNET restore
+popd
 
 echo "Building build tasks"
 rm -Rf "$DIR/tasks/bin/app"

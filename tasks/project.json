@@ -7,8 +7,12 @@
     },
 
     "dependencies": {
-        "DotNetDo.BuildSystem.ManagedCode": "0.1.0-*",
-        "DotNetDo.Engine": "0.1.0-*"
+        "DotNetDo.BuildSystem.ManagedCode": { "target": "package", "version": "0.1.0-*" },
+        "DotNetDo.BuildSystem": { "target": "package", "version": "0.1.0-*" },
+        "DotNetDo.Engine": { "target": "package", "version": "0.1.0-*" },
+        "DotNetDo.Tasks": { "target": "package", "version": "0.1.0-*" },
+        "DotNetDo.Helpers": { "target": "package", "version": "0.1.0-*" },
+        "DotNetDo.Abstractions": { "target": "package", "version": "0.1.0-*" }
     },
 
     "commands": {
