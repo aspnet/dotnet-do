@@ -13,14 +13,14 @@
     "frameworks": {
         "dotnet5.4": {
             "dependencies": {
-                "System.Runtime.InteropServices.RuntimeInformation": "4.0.0-rc2-23811",
-                "System.IO.FileSystem": "4.0.1-rc2-23811",
-                "System.Diagnostics.Process": "4.1.0-rc2-23811",
-                "Microsoft.CSharp": "4.0.1-rc2-23811",
-                "System.Collections": "4.0.11-rc2-23811",
-                "System.Linq": "4.0.2-rc2-23811",
-                "System.Runtime": "4.1.0-rc2-23811",
-                "System.Threading": "4.0.11-rc2-23811"
+                "System.Runtime.InteropServices.RuntimeInformation": "4.0.0-rc2-23818",
+                "System.IO.FileSystem": "4.0.1-rc2-23818",
+                "System.Diagnostics.Process": "4.1.0-rc2-23818",
+                "Microsoft.CSharp": "4.0.1-rc2-23818",
+                "System.Collections": "4.0.11-rc2-23818",
+                "System.Linq": "4.1.0-rc2-23818",
+                "System.Runtime": "4.1.0-rc2-23818",
+                "System.Threading": "4.0.11-rc2-23818"
             }
         }
     }
