@@ -4,8 +4,9 @@ namespace DotNetDo.BuildSystem.ManagedCode
 {
     public class NuGetPackTaskOptions
     {
-        public string OutputRoot { get; } 
-        public IEnumerable<string> ProjectGlobs { get; }
+        public string OutputRoot { get; set; }
+        public string VersionSuffix { get; set; }
+        public IEnumerable<string> ProjectGlobs { get; set; }
 
         public NuGetPackTaskOptions(string outputRoot, IEnumerable<string> projectGlobs)
         {

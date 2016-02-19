@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DotNetDo.Helpers;
 using Microsoft.Extensions.Logging;
@@ -15,9 +16,19 @@ namespace DotNetDo.BuildSystem.ManagedCode.DotNet
             foreach(var project in fs.Files(options.ProjectGlobs))
             {
                 log.LogTrace("Packing {0}", project.FullName);
-                cmd.Exec(DotNetCli.Default.Pack(project.FullName, 
-                    "--output", options.OutputRoot,
-                    "--no-build"));
+
+                var args = new List<string>();
+                args.Add(project.FullName);
+                args.Add("--output");
+                args.Add(options.OutputRoot);
+                args.Add("--no-build");
+                if (!string.IsNullOrEmpty(options.VersionSuffix))
+                {
+                    args.Add("--version-suffix");
+                    args.Add(options.VersionSuffix);
+                }
+
+                cmd.Exec(DotNetCli.Default.Pack(args));
             }
         }
     }
