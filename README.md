@@ -1,7 +1,8 @@
 dotnet-do
 =========
-AppVeyor: TODO
-Travis:   TODO
+AppVeyor: [![AppVeyor](https://ci.appveyor.com/api/projects/status/ae6602y5rqylxdni/branch/dev?svg=true)](https://ci.appveyor.com/project/aspnetci/dotnet-do/branch/dev)
+
+Travis:   [![Travis](https://travis-ci.org/aspnet/dotnet-do.svg?branch=dev)](https://travis-ci.org/aspnet/dotnet-do)
 
 .NET Task Runner
 
